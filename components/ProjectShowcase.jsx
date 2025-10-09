@@ -8,71 +8,35 @@ const ProjectShowcase = () => {
   const sliderRef = useRef(null);
 
   // Updated project data with temple-related titles
-  const projects = [
-    {
-      id: 1,
-      title: 'Shri 1008 Munisuvratnath Jain Temple',
-      image: '/img5.png',
-      link: '',
-      category: 'Corporate'
-    },
-    {
-      id: 2,
-      title: 'Shri Adinath Bhagwan Temple Complex',
-      image: '/img2.jpg',
-      link: '',
-      category: 'Corporate'
-    },
-    {
-      id: 3,
-      title: 'Community Marble Temple',
-      image: '/img4.png',
-      link: '',
-      category: 'Corporate'
-    },
-    {
-      id: 4,
-      title: 'Luxury Villa Home Temple',
-      image: '/img12.jpg',
-      link: '',
-      category: 'Luxury-Living'
-    },
-    {
-      id: 5,
-      title: 'Modern Apartment Temple',
-      image: '/img10.jpg',
-      link: '',
-      category: 'Luxury-Living'
-    },
-    {
-      id: 6,
-      title: 'Garden Temple Pavilion',
-      image: '/img7.png',
-      link: '',
-      category: 'Luxury-Living'
-    },
-    {
-      id: 7,
-      title: 'Jain Temple Complex',
-      image: '/img10.jpg',
-      category: 'Overseas',
-      link: ''
-    },
-    {
-      id: 8,
-      title: 'Cultural Center Temple',
-      image: '/murti1.jpg',
-      category: 'Overseas',
-      link: ''
-    },
-    {
-      id: 9,
-      title: 'Peace Temple',
-      image: '/project5.jpg',
-      category: 'Overseas',
-      link: ''
-    }
-  ]
+const projects = [
+  // Corporate (1–12)
+  ...Array.from({ length: 12 }, (_, i) => ({
+    id: i + 1,
+    title: 'Shri 1008 Munisuvratnath Jain Temple',
+    image: `/gallery${i + 1}.jpg`,
+    link: '',
+    category: 'Corporate',
+  })),
+
+  // Luxury-Living (13–23)
+  ...Array.from({ length: 11 }, (_, i) => ({
+    id: i + 13,
+    title: 'Luxury Villa Home Temple',
+    image: `/gallery${i + 13}.jpg`,
+    link: '',
+    category: 'Luxury-Living',
+  })),
+
+  // Overseas (24–33)
+  ...Array.from({ length: 10 }, (_, i) => ({
+    id: i + 24,
+    title: 'Jain Temple Complex',
+    image: `/gallery${i + 24}.jpg`,
+    link: '',
+    category: 'Overseas',
+  })),
+];
+
 
   // Filter projects based on active tab
   const filteredProjects = projects.filter(project => project.category === activeTab);
