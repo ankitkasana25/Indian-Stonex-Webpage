@@ -1,0 +1,500 @@
+.hero {
+  position: relative;
+  min-height: 83vh;
+  display: flex;
+  align-items: center;
+  background-image: url('/HDimg.jpg'); /* Replace with your image path */
+  background-size: cover; /* Keeps aspect ratio, covers the whole container */
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2rem 0; 
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.215); /* Reduced overlay darkness */
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  max-width: 1450px;
+  margin: 0 auto;
+  gap: 4rem; /* Increased gap from 2rem to 4rem */
+}
+
+.leftContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Changed from center to flex-start */
+  justify-content: center;
+  color: white;
+  text-align: left; /* Changed from center to left */
+  padding-left: 2rem; /* Added padding to move text more left */
+  transition: all 0.3s ease; /* Added transition for smooth centering */
+}
+
+/* New class for centered content when form is closed */
+.centeredContent {
+  align-items: center;
+  text-align: center;
+  padding-left: 0; /* Remove left padding when centered */
+  width: 100%;
+}
+
+.leftContent h1 {
+  font-size: 2.5rem;
+  font-weight: 100;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.mobileExpertButton {
+  display: none;
+  background: var(--color-theme);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.mobileExpertButton:hover {
+  background: var(--color-hover-theme);
+}
+
+.rightContent {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 4rem; /* Increased padding from 2rem to 4rem */
+  transition: all 0.3s ease; /* Added transition for smooth hiding */
+}
+
+/* New class to hide the form */
+.hiddenForm {
+  display: none;
+}
+
+.contactForm {
+  background: rgb(255 255 255 / 62%); /* Light blue with slight transparency */
+  padding: 1.5rem; /* Reduced padding */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 380px; /* Reduced width from 450px */
+  position: relative;
+  backdrop-filter: blur(5px); /* Adds a subtle blur effect for better readability */
+  border: 1px solid #1a1a1a; /* Darker border */
+}
+
+.closeButton {
+  display: block; /* Changed to always show cross button */
+  position: absolute;
+  top: 0.5rem; /* Adjusted position */
+  right: 0.5rem; /* Adjusted position */
+  background: var(--color-theme);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  z-index: 1001;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* New desktop close button - hidden on mobile */
+.desktopCloseButton {
+  display: none; /* Hidden by default, shown only on desktop */
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #000;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  z-index: 1001;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.desktopCloseButton:hover {
+  background: var(--color-hover-theme);
+  transform: scale(1.1);
+}
+
+.closeButton:hover {
+  background: #000;
+  transform: scale(1.1);
+}
+
+.contactForm h2 {
+  font-size: 1.3rem; /* Reduced font size */
+  margin-bottom: 0.5rem;
+  color: #000; /* Black color for better visibility */
+  font-weight: 600;
+  text-align: center; /* Center the text */
+  margin-top: 0.5rem; /* Added margin */
+}
+
+.contactForm > p {
+  color: #333; /* Darker text for better visibility */
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.formGroup {
+  margin-bottom: 1rem; /* Reduced margin */
+  position: relative;
+}
+
+.inputContainer {
+  position: relative;
+  margin-top: 0.8rem; /* Reduced margin */
+}
+
+.inputContainer label {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.5rem; /* Adjusted position */
+  font-size: 0.9rem; /* Reduced font size */
+  color: #333; /* Darker label text */
+  pointer-events: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.inputContainer .focusedLabel {
+  top: -0.6rem; /* Adjusted position */
+  left: 0.5rem;
+  font-size: 0.75rem; /* Reduced font size */
+  background: var(--color-theme);
+  padding: 0 0.5rem;
+  color: #fff; /* White text on blue background */
+  border-radius: 3px;
+}
+
+.inputContainer input {
+  width: 100%;
+  padding: 0.6rem; /* Reduced padding */
+  border: 1px solid #333; /* Darker border */
+  border-radius: 4px;
+  font-size: 0.9rem; /* Reduced font size */
+  background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+  color: #000; /* Black text */
+  height: 40px; /* Fixed height */
+}
+
+.inputContainer input:focus {
+  outline: none;
+  border-color: #000; /* Black border on focus */
+  background: rgba(255, 255, 255, 1); /* Solid white when focused */
+}
+
+.phoneInputContainer {
+  position: relative;
+}
+
+.phoneInput {
+  display: flex;
+  align-items: center;
+  border: 1px solid #333; /* Darker border */
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+  background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+  height: 40px; /* Fixed height */
+}
+
+.phoneInputFocused {
+  border-color: #000; /* Black border on focus */
+  background: rgba(255, 255, 255, 1); /* Solid white when focused */
+}
+
+.countryCode {
+  padding: 0.6rem; /* Reduced padding */
+  background: rgba(245, 245, 245, 0.9); /* Slightly transparent background */
+  border-right: 1px solid #333; /* Darker border */
+  font-size: 0.9rem; /* Reduced font size */
+  color: #000; /* Black text */
+  font-weight: 500;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.phoneInput input {
+  border: none;
+  padding: 0.6rem; /* Reduced padding */
+  font-size: 0.9rem; /* Reduced font size */
+  width: 100%;
+  border-radius: 0 4px 4px 0;
+  background: transparent;
+  color: #000; /* Black text */
+  height: 100%;
+}
+
+.phoneInput input:focus {
+  outline: none;
+  border-color: transparent;
+}
+
+.radioLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600; /* Bolder font */
+  color: #000; /* Black color */
+  font-size: 0.85rem; /* Reduced font size */
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem; /* Reduced gap */
+}
+
+.radioOption {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 1.8rem; /* Reduced padding */
+  cursor: pointer;
+  color: #000; /* Black text */
+  font-size: 0.85rem; /* Reduced font size */
+  font-weight: 500;
+}
+
+.radioOption input[type="radio"] {
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  width: 18px; /* Reduced size */
+  height: 18px; /* Reduced size */
+  cursor: pointer;
+}
+
+.nextButton {
+  background: #000; /* Black background */
+  color: white;
+  border: none;
+  padding: 0.6rem 2rem; /* Reduced padding */
+  font-size: 0.9rem; /* Reduced font size */
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.8rem; /* Reduced margin */
+   /* Black border */
+  height: 45px; /* Fixed height */
+}
+
+
+
+/* Show desktop close button only on desktop */
+@media (min-width: 769px) {
+  .desktopCloseButton {
+    display: flex;
+  }
+  
+  .closeButton {
+    display: none; /* Hide mobile close button on desktop */
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .heroContent {
+    padding: 0 10%;
+  }
+  
+  .rightContent {
+    padding-right: 1rem; /* Adjusted padding for tablet */
+  }
+  
+  .contactForm {
+    width: 350px; /* Adjusted width for tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 90vw; /* Set height to 60vw on mobile */
+  }
+  
+  .heroContent {
+    flex-direction: column;
+    padding: 0 5%;
+    gap: 2rem; /* Reset gap for mobile */
+  }
+  
+  .leftContent {
+    margin-bottom: 2rem;
+    align-items: center; /* Center on mobile */
+    text-align: center; /* Center on mobile */
+    padding-left: 0; /* Remove left padding on mobile */
+  }
+  
+  .leftContent h1 {
+    font-size: 1.8rem;
+  }
+  
+  .rightContent {
+    display: none;
+    padding-right: 0; /* Reset padding for mobile */
+    justify-content: center; /* Center on mobile */
+  }
+  
+  .mobileExpertButton {
+    display: block;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .mobileFormVisible {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Reduced overlay darkness */
+    z-index: 1000;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 3rem;
+    overflow-y: auto;
+  }
+  
+  .closeButton {
+    display: flex; /* Ensure cross button is visible on mobile */
+  }
+  
+  .contactForm {
+    width: 90%;
+    max-width: 380px; /* Reduced max-width */
+    margin: 1rem auto;
+    padding: 1.5rem;
+    transform: translateY(0); /* Ensure form is at the top */
+  }
+  
+  .contactForm h2 {
+    font-size: 1.3rem;
+    margin-right: 1.5rem;
+  }
+  
+  .inputContainer label {
+    font-size: 0.9rem;
+  }
+  
+  .inputContainer input {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+  
+  .radioLabel {
+    font-size: 0.8rem;
+  }
+  
+  .countryCode {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .phoneInput input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .radioOption {
+    font-size: 0.8rem;
+    padding-left: 1.8rem;
+  }
+  
+  .radioOption input[type="radio"] {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .nextButton {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 90vw; /* Set height to 60vw on mobile */
+  }
+  
+  .leftContent h1 {
+    font-size: 1.6rem;
+  }
+  
+  .contactForm {
+    padding: 1.2rem;
+    width: 95%;
+    margin-top: 2rem; /* Added margin to ensure form is visible below header */
+  }
+  
+  .contactForm h2 {
+    font-size: 1.2rem;
+  }
+  
+  .inputContainer label {
+    font-size: 0.85rem;
+  }
+  
+  .inputContainer input {
+    font-size: 0.85rem;
+  }
+  
+  .radioOption {
+    font-size: 0.75rem;
+  }
+}
+
+/* Ensure form is always at the top on mobile */
+@media (max-width: 768px) {
+  .mobileFormVisible .contactForm {
+    position: relative;
+    top: 0;
+    margin-top: 2rem;
+  }
+}
+
+/* Animation for form appearance */
+.contactForm {
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

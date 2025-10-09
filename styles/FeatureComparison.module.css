@@ -1,0 +1,130 @@
+.comparisonSection {
+  background-color: #fffbf0;
+  padding: 60px 0;
+}
+
+.headingContainer h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.comparisonBlocks {
+  display: flex;
+  justify-content: center;
+}
+
+.blockContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.comparisonBlock {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.leftBlock, .rightBlock {
+  background-color: transparent;
+  justify-content: center;
+}
+
+.centerBlock {
+  background-color: white;
+  padding: 0;
+}
+
+.blockHeader {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.blockHeader h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.blockContent {
+  padding: 20px;
+}
+
+.blockContent h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.blockContent p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparisonTable th, .comparisonTable td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.comparisonTable th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+.featureHeader {
+  font-weight: 600;
+  color: #333;
+}
+
+.checkIcon {
+  color: green;
+  margin-right: 8px;
+}
+
+.closeIcon {
+  color: #d32f2f;
+  margin-right: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  .blockContainer {
+    flex-direction: column;
+  }
+  
+  .comparisonBlock {
+    margin-bottom: 20px;
+  }
+  
+  .headingContainer h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .comparisonSection {
+    padding: 40px 0;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+  }
+  
+  .comparisonTable {
+    min-width: 600px;
+  }
+}

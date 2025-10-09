@@ -1,0 +1,253 @@
+.budgetSection {
+  padding: 60px 0;
+}
+
+.headerContainer {
+  text-align: center;
+}
+
+.headerContainer h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: .1875rem;
+  margin-bottom: .6rem;
+  text-align: center;
+}
+
+.headerContainer p {
+  text-align: center;
+}
+
+.budgetRow {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin: 0 -15px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 20px; /* Added 20px padding to the row */
+}
+
+.budgetRow::-webkit-scrollbar {
+  display: none;
+}
+
+.customCol {
+  flex: 0 0 auto;
+  width: 300px;
+  padding: 15px;
+  display: flex;
+}
+
+.poojaCard {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.poojaCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cardImg {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.cardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transition: transform 0.5s ease;
+}
+
+.poojaCard:hover .cardImg img {
+  transform: scale(1.1);
+}
+
+.priceSection {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--color-theme);
+  color: #fff;
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  font-family: var(--futura-pt-light);
+  border-radius: 2px;
+  letter-spacing: 0.04rem;
+  transition: all 0.3s ease;
+  z-index: 0;
+}
+
+.poojaCard:hover .priceSection {
+  transform: translateY(-5px);
+}
+
+.bottomSection {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  z-index: 7;
+  color: #fff;
+  font-weight: 400;
+  font-family: var(--futura-pt-light);
+  letter-spacing: 0.04rem;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.poojaCard:hover .bottomSection {
+  transform: translateY(-5px);
+}
+
+.cardImg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.poojaCard:hover .cardImg::after {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+  .budgetRow {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    justify-content: center;
+    padding: 0; /* Remove padding on large screens */
+  }
+  
+  .customCol {
+    flex: 0 0 25%;
+    max-width: 25%;
+    width: auto;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  .budgetRow {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    justify-content: center;
+    padding: 0; /* Remove padding on medium screens */
+  }
+  
+  .customCol {
+    flex: 0 0 50%;
+    max-width: 50%;
+    width: auto;
+  }
+  
+  .headerContainer h2 {
+    font-size: 1.4rem;
+    letter-spacing: .15rem;
+  }
+  
+  .headerContainer p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+  .budgetRow {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0 20px; /* Keep 20px padding on tablet */
+  }
+  
+  .headerContainer h2 {
+    font-size: 1.3rem;
+    letter-spacing: .1rem;
+  }
+  
+  .headerContainer p {
+    font-size: 0.9rem;
+  }
+  
+  .cardImg {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .budgetSection {
+    padding: 40px 0;
+  }
+  
+  /* Update container padding for mobile */
+  .container-fluid {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  .headerContainer h2 {
+    font-size: 1.2rem;
+    letter-spacing: .08rem;
+  }
+  
+  .headerContainer p {
+    font-size: 0.85rem;
+  }
+  
+  .budgetRow {
+    padding: 0 10px; /* Slightly reduce row padding on mobile */
+  }
+  
+  .customCol {
+    width: 280px;
+    padding: 10px;
+  }
+  
+  .cardImg {
+    height: 350px;
+  }
+  
+  .priceSection {
+    top: 15px;
+    left: 15px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .bottomSection {
+    bottom: 15px;
+    left: 15px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .headerContainer h2 {
+    font-size: 1.1rem;
+    letter-spacing: .05rem;
+  }
+  
+  .headerContainer p {
+    font-size: 0.8rem;
+  }
+  
+  .customCol {
+    width: 260px;
+  }
+  
+  .cardImg {
+    height: 320px;
+  }
+}

@@ -1,0 +1,361 @@
+.section {
+  padding: 60px 0;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.container {
+  max-width: 1320px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  /* Remove negative margins that cause overflow */
+  margin-right: 0;
+  margin-left: 0;
+  width: 100%; /* Ensure row takes full width */
+}
+
+.justifyContentCenter {
+  justify-content: center !important;
+}
+
+.colXl10 {
+  flex: 0 0 auto;
+  width: 83.33333333%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+}
+
+.colMd12 {
+  flex: 0 0 auto;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+}
+
+.btnTab {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.btnTab ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.btnTab ul::-webkit-scrollbar {
+  display: none;
+}
+
+.btnTab li {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+
+.btnTab li:hover {
+  background-color: #e9ecef;
+  border-color: var(--color-theme);
+  color: var(--color-theme);
+}
+
+.btnTab li.active {
+  background-color: var(--color-theme);
+  color: #fff;
+}
+
+.btnTab li.active:hover {
+  background-color: var(--color-hover-theme);
+  color: #fff;
+}
+
+.mt4 {
+  margin-top: 1.5rem !important;
+}
+
+.sliderContainer {
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: 350px;
+  scroll-snap-align: start;
+}
+
+.cardProject {
+  margin-bottom: 0.5rem;
+}
+
+.clientCard {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.clientCard:hover {
+  transform: translateY(-5px);
+}
+
+.cardImg {
+  width: 100%;
+  height: 250px; /* or any fixed height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.projectImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.caption {
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.projectTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.sliderControls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.slickPrev, .slickNext {
+  pointer-events: all;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-theme);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slickPrev {
+  margin-left: -20px;
+}
+
+.slickNext {
+  margin-right: -20px;
+}
+
+.slickPrev:hover, .slickNext:hover {
+  background-color: #333;
+}
+
+.slickPrev:disabled, .slickNext:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.slickPrev svg, .slickNext svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .colXl10 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .heading {
+    font-size: 2.2rem;
+  }
+  
+  .slide {
+    width: 320px;
+  }
+  
+  .btnTab ul {
+    gap: 0.8rem;
+  }
+  
+  .btnTab li {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 0;
+  }
+  
+  .heading {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btnTab ul {
+    gap: 0.5rem;
+    justify-content: center;
+    padding-bottom: 5px;
+  }
+  
+  .btnTab li {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .slide {
+    width: 280px;
+  }
+  
+  .cardImg {
+    height: 220px;
+  }
+  
+  .projectTitle {
+    font-size: 1rem;
+  }
+
+  .slickPrev, .slickNext {
+    width: 36px;
+    height: 36px;
+  }
+
+  .slickPrev {
+    margin-left: -10px;
+  }
+
+  .slickNext {
+    margin-right: -10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .heading {
+    font-size: 1.6rem;
+  }
+  
+  .btnTab ul {
+    gap: 0.4rem;
+  }
+  
+  .btnTab li {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .slide {
+    width: 260px;
+  }
+  
+  .cardImg {
+    height: 200px;
+  }
+  
+  .projectTitle {
+    font-size: 0.95rem;
+  }
+  
+  .slickPrev, .slickNext {
+    width: 32px;
+    height: 32px;
+  }
+
+  .slickPrev svg, .slickNext svg {
+    width: 16px;
+    height: 16px;
+  }
+  .sliderControls{
+    left: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .heading {
+    font-size: 1.4rem;
+  }
+  
+  .btnTab ul {
+    gap: 0.3rem;
+  }
+  
+  .btnTab li {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  
+  .slide {
+    width: 240px;
+  }
+}

@@ -1,0 +1,467 @@
+.section {
+  padding: 80px 0;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1320px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -15px;
+}
+
+.contentColumn {
+  flex: 0 0 58.333333%;
+  max-width: 58.333333%;
+  padding: 15px;
+  position: relative;
+  width: 100%;
+}
+
+.imageColumn {
+  flex: 0 0 41.666667%;
+  max-width: 41.666667%;
+  padding: 15px;
+  position: relative;
+  width: 100%;
+}
+
+.content {
+  max-width: 90%;
+  position: relative;
+  z-index: 2;
+}
+
+.featureIcons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.iconItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8f9fa;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.iconWrapper {
+  background: var(--color-theme);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.iconItem span {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.content h2 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+  line-height: 1.3;
+}
+
+.content p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.featureList {
+  margin-bottom: 2.5rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.featureArrow {
+  color: var(--color-theme);
+  font-size: 0.9rem;
+}
+
+.btnFree {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  background: var(--color-theme);
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+}
+
+.btnFree:hover {
+  background: var(--color-hover-theme);
+  transform: translateY(-2px);
+}
+
+.btnIcon {
+  transition: transform 0.3s ease;
+}
+
+.btnFree:hover .btnIcon {
+  transform: translateX(5px);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 450px;
+}
+
+.serviceImg {
+  background-image: url('/support3.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  position: relative;
+  z-index: 2;
+  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
+}
+
+
+/* Form overlay styles (unchanged) */
+.formOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.formContainer {
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  color: #666;
+}
+
+.contactForm {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  position: relative;
+}
+
+.contactForm h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.formGroup {
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.inputContainer {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.inputContainer label {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  font-size: 1rem;
+  color: #999;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.inputContainer .focusedLabel {
+  top: -0.75rem;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  background: white;
+  padding: 0 0.5rem;
+  color: #1e90ff;
+}
+
+.inputContainer input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.inputContainer input:focus {
+  outline: none;
+  border-color: #1e90ff;
+}
+
+.phoneInputContainer {
+  position: relative;
+}
+
+.phoneInput {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.phoneInputFocused {
+  border-color: #1e90ff;
+}
+
+.countryCode {
+  padding: 0.75rem;
+  background: #f5f5f5;
+  border-right: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.phoneInput input {
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 0 4px 4px 0;
+}
+
+.radioLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.radioOption {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 2rem;
+  cursor: pointer;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.radioOption input[type="radio"] {
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.nextButton {
+  background: var(--color-theme);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .content p {
+    font-size: 1rem;
+  }
+  
+  .imageWrapper {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  
+  .contentColumn, .imageColumn {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .content {
+    max-width: 100%;
+    text-align: left;
+    margin-bottom: 30px;
+    padding: 0 10px;
+  }
+  
+  .content h2 {
+    font-size: 1.6rem;
+  }
+  
+  .content p {
+    font-size: 1rem;
+    width: 100%;
+    padding: 1rem 0;
+  }
+  
+  .imageWrapper {
+    height: 300px;
+  }
+
+  .featureIcons {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 60px 0;
+  }
+  
+  .content {
+    padding: 0 0;
+    text-align: left;
+  }
+  
+  .content h2 {
+    font-size: 1.4rem;
+  }
+  
+  .content p {
+    font-size: 0.95rem;
+    padding: 0.8rem 0;
+  }
+  
+  .btnFree {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+  
+  .imageWrapper {
+    height: 250px;
+  }
+
+  .featureIcons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .iconItem {
+    width: fit-content;
+  }
+
+  /* Form responsive styles */
+  .contactForm {
+    padding: 1.5rem;
+  }
+  
+  .contactForm h2 {
+    font-size: 1.3rem;
+  }
+  
+  .inputContainer label {
+    font-size: 0.9rem;
+  }
+  
+  .inputContainer input {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+  
+  .radioLabel {
+    font-size: 0.8rem;
+  }
+  
+  .countryCode {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .phoneInput input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .radioOption {
+    font-size: 0.8rem;
+    padding-left: 1.8rem;
+  }
+  
+  .radioOption input[type="radio"] {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .nextButton {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
