@@ -46,7 +46,7 @@ export default function AboutUs() {
 ]
 
 
-  // ------------------- FADE-IN ANIMATION -------------------
+  // ------------------- FADE-IN ANIMATION ---------
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
