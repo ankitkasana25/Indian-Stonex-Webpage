@@ -44,6 +44,16 @@ const Footer = () => {
                                 >
                                     <span className="font-normal  tracking-wider">Email:</span> info@indianstonex.com
                                 </a>
+                                    <a
+                                    className=" transition-colors flex items-center gap-2"
+                                >
+                                    <span className="font-normal  tracking-wider">ISO No. :</span> ISO 9001:2015
+                                </a>
+                                    <a
+                                    className=" transition-colors flex items-center gap-2"
+                                >
+                                    <span className="font-normal  tracking-wider">Certificate:</span> KSRI2510732408
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -5,55 +5,26 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react"
 export default function AboutUs() {
   const heroRef = useRef(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
-  const [showAll, setShowAll] = useState(false) // show more toggle
+  const [showAll, setShowAll] = useState(false)
 
-  // ------------------- GALLERY IMAGES -------------------
- const images = [
-  { src: "/gallery1.jpg", alt: "Intricate white marble temple carving detail" },
-  { src: "/gallery2.jpg", alt: "Marble mandir with arches" },
-  { src: "/gallery3.jpg", alt: "Handcrafted stone sculpture" },
-  { src: "/gallery4.jpg", alt: "Custom stonework pillar" },
-  { src: "/gallery5.jpg", alt: "Marble inlay floral pattern" },
-  { src: "/gallery6.jpg", alt: "Temple entrance stone craft" },
-  { src: "/gallery7.jpg", alt: "Traditional marble temple interior" },
-  { src: "/gallery8.jpg", alt: "Detailed marble ceiling design" },
-  { src: "/gallery9.jpg", alt: "Beautiful marble wall carving" },
-  { src: "/gallery10.jpg", alt: "Grand marble temple entrance" },
-  { src: "/gallery11.jpg", alt: "Decorative marble jali work" },
-  { src: "/gallery12.jpg", alt: "Stone idols carved with precision" },
-  { src: "/gallery13.jpg", alt: "Marble steps and flooring pattern" },
-  { src: "/gallery14.jpg", alt: "Temple dome made of pure marble" },
-  { src: "/gallery15.jpg", alt: "Elegant marble pillars with carving" },
-  { src: "/gallery16.jpg", alt: "Modern marble wall installation" },
-  { src: "/gallery17.jpg", alt: "Traditional marble pooja room setup" },
-  { src: "/gallery18.jpg", alt: "White marble temple craftsmanship" },
-  { src: "/gallery19.jpg", alt: "Detailed sculpture of deity in marble" },
-  { src: "/gallery20.jpg", alt: "Ornamental marble arch design" },
-  { src: "/gallery21.jpg", alt: "Custom-designed marble mandir" },
-  { src: "/gallery22.jpg", alt: "Polished marble surface detail" },
-  { src: "/gallery23.jpg", alt: "Intricate temple facade in stone" },
-  { src: "/gallery24.jpg", alt: "Decorative marble panel work" },
-  { src: "/gallery25.jpg", alt: "Carved marble backdrop design" },
-  { src: "/gallery26.jpg", alt: "Luxurious marble pooja mandir" },
-  { src: "/gallery27.jpg", alt: "Stone and marble pillar pattern" },
-  { src: "/gallery28.jpg", alt: "Temple carving under natural light" },
-  { src: "/gallery29.jpg", alt: "Traditional stone temple courtyard" },
-  { src: "/gallery30.jpg", alt: "Temple statue carved from marble" },
-  { src: "/gallery31.jpg", alt: "Decorative marble tiling work" },
-  { src: "/gallery32.jpg", alt: "Beautiful handcrafted marble facade" },
-  { src: "/gallery33.jpg", alt: "Divine white marble temple sculpture" },
-  { src: "/gallery34.jpg", alt: "Custom marble temple craftsmanship" },
-]
+  const images = [
+    { src: "/gallery1.jpg", alt: "Intricate white marble temple carving detail" },
+    { src: "/gallery2.jpg", alt: "Marble mandir with arches" },
+    { src: "/gallery3.jpg", alt: "Handcrafted stone sculpture" },
+    { src: "/gallery4.jpg", alt: "Custom stonework pillar" },
+    { src: "/gallery5.jpg", alt: "Marble inlay floral pattern" },
+    { src: "/gallery6.jpg", alt: "Temple entrance stone craft" },
+    { src: "/gallery7.jpg", alt: "Traditional marble temple interior" },
+    { src: "/gallery8.jpg", alt: "Detailed marble ceiling design" },
+    { src: "/gallery9.jpg", alt: "Beautiful marble wall carving" },
+    { src: "/gallery10.jpg", alt: "Grand marble temple entrance" },
+  ]
 
-
-  // ------------------- FADE-IN ANIMATION ---------
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up")
-          }
+          if (entry.isIntersecting) entry.target.classList.add("animate-fade-in-up")
         })
       },
       { threshold: 0.15 }
@@ -61,19 +32,11 @@ export default function AboutUs() {
 
     const sections = document.querySelectorAll(".fade-in-section")
     sections.forEach((section) => observer.observe(section))
-
     return () => observer.disconnect()
   }, [])
 
-  // ------------------- LIGHTBOX NAVIGATION -------------------
-  const handlePrev = () => {
-    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  }
-  const handleNext = () => {
-    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }
-
-  // ------------------- DISPLAY LIMITED IMAGES INITIALLY -------------------
+  const handlePrev = () => setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  const handleNext = () => setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
   const displayedImages = showAll ? images : images.slice(0, 6)
 
   return (
@@ -131,12 +94,10 @@ export default function AboutUs() {
       <section className="fade-in-section border-b border-gray-100 bg-white py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {[
-              { num: "25+", label: "Years Experience" },
+            {[{ num: "25+", label: "Years Experience" },
               { num: "120+", label: "Projects Delivered" },
               { num: "08", label: "Countries Served" },
-              { num: "100%", label: "Custom Crafted" },
-            ].map((item, idx) => (
+              { num: "100%", label: "Custom Crafted" }].map((item, idx) => (
               <div key={idx} className="text-center animate-fade-in-up">
                 <p className="font-light text-5xl text-[#ff7e2e]">{item.num}</p>
                 <p className="mt-2 text-base text-gray-600">{item.label}</p>
@@ -149,26 +110,56 @@ export default function AboutUs() {
       {/* ---------------- ABOUT SECTION ---------------- */}
       <section id="about" className="fade-in-section scroll-mt-20 bg-white py-24">
         <div className="mx-auto max-w-5xl px-6 text-center">
-          <span className="block font-light tracking-wide text-xl text-[#ff7e2e]">
-            ABOUT US
-          </span>
+          <span className="block font-light tracking-wide text-xl text-[#ff7e2e]">ABOUT US</span>
           <h2 className="mt-4 font-light text-3xl sm:text-4xl md:text-5xl animate-slide-up">
             About Us –{" "}
             <span className="bg-gradient-to-r from-[#ff7e2e] to-[#ffb380] bg-clip-text text-transparent">
               Indian Stonex
             </span>
           </h2>
+
           <div className="mt-10 space-y-6 text-lg leading-relaxed text-gray-700">
             <p>
-              At <strong>Indian Stonex</strong>, we believe that stone is not just a material – it is a timeless art
-              form. With years of expertise in the stone industry, we specialize in crafting premium marble temples,
-              stone artifacts, sculptures, and architectural elements that bring elegance, spirituality, and heritage
-              into every space.
+              At <strong>Indian Stonex</strong>, we believe stone is more than a material—it’s a timeless art form.
+              With over two decades of craftsmanship, we specialize in creating exquisite marble temples, stone
+              sculptures, and architectural masterpieces that blend elegance, devotion, and Indian heritage.
             </p>
+
             <p>
-              Founded with a vision to blend traditional craftsmanship with modern design, Indian Stonex has become a
-              trusted name among homeowners, architects, interior designers, and builders across India and abroad. Every
-              creation we deliver is a symbol of purity, durability, and beauty – where stone truly becomes art.
+              We are proud to be an <strong>ISO 9001:2015 Certified Organization</strong> by{" "}
+              <strong>KSR Certification LLP (Certificate No: KSRI2510732408)</strong>. This certification reflects
+              our commitment to maintaining the highest quality standards in design, manufacturing, and customer
+              service — ensuring every creation meets international benchmarks for excellence.
+            </p>
+
+            <p>
+              Headquartered in <strong>Makrana, Rajasthan</strong> — the land of world-famous marble — Indian Stonex
+              serves clients across India and abroad, delivering artistry that transforms spaces into sanctuaries of
+              divinity and beauty.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ✨ UPDATED SECTION: Certified Excellence (Text Only) */}
+      <section className="fade-in-section bg-gray-50 py-20">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <h2 className="text-3xl font-light sm:text-4xl md:text-5xl text-gray-900">
+            Certified <span className="text-[#ff7e2e]">Excellence</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-3xl text-lg text-gray-700">
+            Our ISO 9001:2015 certification guarantees that every process — from raw material selection to final
+            delivery — is governed by stringent quality management practices. This recognition assures our customers
+            that <strong>Indian Stonex</strong> stands for trust, consistency, and global craftsmanship.
+          </p>
+
+          <div className="mt-10 mx-auto max-w-md text-left sm:text-center space-y-3">
+            <p><strong>Certificate No:</strong> KSRI2510732408</p>
+            <p><strong>Standard:</strong> ISO 9001:2015 – Quality Management System</p>
+            <p><strong>Certified By:</strong> KSR Certification LLP</p>
+            <p><strong>Valid Until:</strong> 08 October 2028</p>
+            <p className="text-gray-600 text-sm italic">
+              Validity subject to successful completion of surveillance audits.
             </p>
           </div>
         </div>
