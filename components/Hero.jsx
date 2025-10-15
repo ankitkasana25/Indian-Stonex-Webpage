@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [isFormClosed, setIsFormClosed] = useState(false); // New state to track form closure
+  const [isFormClosed, setIsFormClosed] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -21,15 +21,12 @@ const Hero = () => {
     city: false
   });
 
-  // Prevent background scrolling when form is visible on mobile
   useEffect(() => {
     if (isFormVisible) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-
-    // Cleanup function
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -59,25 +56,53 @@ const Hero = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
-  };
-
-  // New function to handle cross button click for desktop
   const handleCloseForm = () => {
     setIsFormClosed(true);
   };
 
+  // ✅ WhatsApp sharing handler (fixed)
+  const handleWhatsAppShare = (e) => {
+    e.preventDefault();
 
-  // Framer Motion variants
+    const { fullName, email, phone, city, userType } = formData;
+
+    // Mandatory fields check
+    if (!fullName.trim() || !phone.trim()) {
+      alert('Please fill in your Full Name and Phone Number before proceeding.');
+      return;
+    }
+
+    // Build message dynamically with only filled fields
+    let message = `Hello, I would like to talk to an expert.%0A%0A`;
+    message += `*Full Name:* ${fullName}%0A`;
+    message += `*Phone:* ${phone}%0A`;
+
+    if (email) message += `*Email:* ${email}%0A`;
+    if (city) message += `*City:* ${city}%0A`;
+    if (userType) message += `*User Type:* ${userType}%0A`;
+
+    // Limit to 50 words
+    const wordLimit = 50;
+    const words = message.split(/\s+/);
+    if (words.length > wordLimit) {
+      message = words.slice(0, wordLimit).join(' ') + '...';
+    }
+
+    // ✅ Proper URL encoding
+    const encodedMessage = encodeURIComponent(message);
+
+    const phoneNumber = '917014116801'; // without '+'
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappURL, '_blank');
+  };
+
   const textVariants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.8, ease: 'easeOut' }
     }
   };
 
@@ -85,50 +110,36 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.heroContent}>
         <div className={`${styles.leftContent} ${isFormClosed ? styles.centeredContent : ''}`}>
-          {/* Animate Heading */}
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={textVariants}
-          >
+          <motion.h1 initial="hidden" animate="visible" variants={textVariants}>
             Creating Sacred Spaces<br />For Generations
           </motion.h1>
 
-          {/* Mobile-only button */}
-          <button
-            className={styles.mobileExpertButton}
-            onClick={() => setIsFormVisible(true)}
-          >
+          <button className={styles.mobileExpertButton} onClick={() => setIsFormVisible(true)}>
             Talk to Our Expert
           </button>
-
-
         </div>
 
-        <div className={`${styles.rightContent} ${isFormVisible ? styles.mobileFormVisible : ''} ${isFormClosed ? styles.hiddenForm : ''}`}>
+        <div
+          className={`${styles.rightContent} ${isFormVisible ? styles.mobileFormVisible : ''} ${
+            isFormClosed ? styles.hiddenForm : ''
+          }`}
+        >
           <div className={styles.contactForm}>
-            {/* Close button for mobile */}
-            <button
-              className={styles.closeButton}
-              onClick={() => setIsFormVisible(false)}
-            >
+            <button className={styles.closeButton} onClick={() => setIsFormVisible(false)}>
               <FaTimes />
             </button>
 
-            {/* Cross button for desktop */}
-            <button
-              className={styles.desktopCloseButton}
-              onClick={handleCloseForm}
-            >
+            <button className={styles.desktopCloseButton} onClick={handleCloseForm}>
               <FaTimes />
             </button>
 
             <h2>Talk to Our Expert</h2>
             <div className="text-sm font-bold text-gray-800 hover:text-gray-900 text-center">
-              Contact Us : <span >+91  7014116801</span>
+              Contact Us : <span>+91 7014116801</span>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleWhatsAppShare}>
+              {/* Full Name */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <input
@@ -150,6 +161,7 @@ const Hero = () => {
                 </div>
               </div>
 
+              {/* Email */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <input
@@ -160,17 +172,17 @@ const Hero = () => {
                     onChange={handleInputChange}
                     onFocus={() => handleFocus('email')}
                     onBlur={() => handleBlur('email')}
-                    required
                   />
                   <label
                     htmlFor="email"
                     className={formData.email || focusedFields.email ? styles.focusedLabel : ''}
                   >
-                    Email Address *
+                    Email Address
                   </label>
                 </div>
               </div>
 
+              {/* Phone */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <div className={styles.phoneInputContainer}>
@@ -184,13 +196,15 @@ const Hero = () => {
                         onChange={handleInputChange}
                         onFocus={() => handleFocus('phone')}
                         onBlur={() => handleBlur('phone')}
-                        placeholder="Phone number"
+                        placeholder="Phone number *"
+                        required
                       />
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* City */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <input
@@ -201,19 +215,19 @@ const Hero = () => {
                     onChange={handleInputChange}
                     onFocus={() => handleFocus('city')}
                     onBlur={() => handleBlur('city')}
-                    required
                   />
                   <label
                     htmlFor="city"
                     className={formData.city || focusedFields.city ? styles.focusedLabel : ''}
                   >
-                    City *
+                    City
                   </label>
                 </div>
               </div>
 
+              {/* User Type */}
               <div className={styles.formGroup}>
-                <label className={styles.radioLabel}>Tell us about yourself *</label>
+                <label className={styles.radioLabel}>Tell us about yourself</label>
                 <div className={styles.radioGroup}>
                   <label className={styles.radioOption}>
                     <input
@@ -239,7 +253,10 @@ const Hero = () => {
                 </div>
               </div>
 
-              <button type="submit" className={styles.nextButton}>Next</button>
+              {/* ✅ WhatsApp Share Button */}
+              <button type="submit" className={styles.nextButton}>
+                Share via WhatsApp
+              </button>
             </form>
           </div>
         </div>
