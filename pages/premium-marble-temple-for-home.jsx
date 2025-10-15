@@ -400,150 +400,194 @@ const MarbleTemple = () => {
       </section>
 
       {/* Consultation Form Modal */}
-      <AnimatePresence>
-        {isFormVisible && (
-          <motion.div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+   {/* Consultation Form Modal */}
+<AnimatePresence>
+  {isFormVisible && (
+    <motion.div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+      >
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between">
+            <h3 className="text-2xl font-serif font-light text-gray-800">
+              Begin Your Journey
+            </h3>
+
+            <button
+              onClick={() => setIsFormVisible(false)}
+              className="text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <div className="p-6 border-b border-gray-200">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-2xl font-serif font-light text-gray-800">
-                    Begin Your Journey
-                  </h3>
-                  
-                  <button
-                    onClick={() => setIsFormVisible(false)}
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    <CloseIcon />
-                  </button>
-                </div>
-                <div className="text-sm font-bold text-gray-800 hover:text-gray-900 ">
-              Contact Us : <span >+91  7014116801</span>
+              <CloseIcon />
+            </button>
+          </div>
+          <div className="text-sm font-bold text-gray-800 hover:text-gray-900 ">
+            Contact Us : <span>+91 7014116801</span>
+          </div>
+          <p className="text-gray-600 mt-2 text-sm">
+            Share your details and we'll contact you within 24 hours
+          </p>
+        </div>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            if (!formData.fullName || !formData.phone) {
+              alert("Please fill in your Name and Phone Number.");
+              return;
+            }
+
+            const whatsappNumber = "917014116801";
+            const text =
+              `Hello 👋,%0A%0A` +
+              `Here are the details:%0A` +
+              `Name: ${formData.fullName}%0A` +
+              `Phone: ${formData.phone}%0A` +
+              `Email: ${formData.email || "N/A"}%0A` +
+              `City: ${formData.city || "N/A"}%0A` +
+              `User Type: ${formData.userType || "N/A"}%0A` +
+              `Temple Size: ${formData.templeSize || "N/A"}%0A%0A` +
+              `Thank you!`;
+
+            const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+            window.open(url, "_blank");
+
+            setFormData({
+              fullName: "",
+              email: "",
+              phone: "",
+              city: "",
+              userType: "",
+              templeSize: "",
+            });
+            setIsFormVisible(false);
+          }}
+          className="p-6 space-y-4"
+        >
+          {/* Full Name */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">
+              Full Name *
+            </label>
+            <input
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
+              required
+            />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">
+              Phone Number *
+            </label>
+            <div className="flex border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-theme focus-within:border-transparent">
+              <span className="px-3 py-2.5 bg-gray-100 border-r border-gray-300 flex items-center text-sm">+91</span>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="Enter your number"
+                className="w-full px-3 py-2.5 focus:outline-none text-sm"
+                required
+              />
             </div>
-                <p className="text-gray-600 mt-2 text-sm">
-                  Share your details and we'll contact you within 24 hours
-                </p>
-              </div>
+          </div>
 
-              <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Full Name *</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
-                    required
-                  />
-                </div>
+          {/* Email (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
+            />
+          </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Email Address *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
-                    required
-                  />
-                </div>
+          {/* City (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">City</label>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
+            />
+          </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Phone Number *</label>
-                  <div className="flex border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-theme focus-within:border-transparent">
-                    <span className="px-3 py-2.5 bg-gray-100 border-r border-gray-300 flex items-center text-sm">+91</span>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Enter your number"
-                      className="w-full px-3 py-2.5 focus:outline-none text-sm"
-                      required
-                    />
-                  </div>
-                </div>
+          {/* User Type (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">I am a</label>
+            <div className="space-y-2">
+              <label className="flex items-center text-sm">
+                <input
+                  type="radio"
+                  name="userType"
+                  value="homeowner"
+                  checked={formData.userType === 'homeowner'}
+                  onChange={handleInputChange}
+                  className="mr-2 text-theme focus:ring-hover-theme"
+                />
+                Homeowner looking for a pooja unit
+              </label>
+              <label className="flex items-center text-sm">
+                <input
+                  type="radio"
+                  name="userType"
+                  value="designer"
+                  checked={formData.userType === 'designer'}
+                  onChange={handleInputChange}
+                  className="mr-2 text-theme focus:ring-hover-theme"
+                />
+                Interior designer/consultant
+              </label>
+            </div>
+          </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">City *</label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
-                    required
-                  />
-                </div>
+          {/* Temple Size (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">Preferred Temple Size</label>
+            <select
+              name="templeSize"
+              value={formData.templeSize || ""}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
+            >
+              <option value="">Select size</option>
+              <option value="2-3 ft">2-3 ft (Compact)</option>
+              <option value="3-4 ft">3-4 ft (Medium)</option>
+              <option value="4-5 ft">4-5 ft (Large)</option>
+              <option value="5+ ft">5+ ft (Grand)</option>
+            </select>
+          </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">I am a *</label>
-                  <div className="space-y-2">
-                    <label className="flex items-center text-sm">
-                      <input
-                        type="radio"
-                        name="userType"
-                        value="homeowner"
-                        checked={formData.userType === 'homeowner'}
-                        onChange={handleInputChange}
-                        className="mr-2 text-theme focus:ring-hover-theme"
-                        required
-                      />
-                      Homeowner looking for a pooja unit
-                    </label>
-                    <label className="flex items-center text-sm">
-                      <input
-                        type="radio"
-                        name="userType"
-                        value="designer"
-                        checked={formData.userType === 'designer'}
-                        onChange={handleInputChange}
-                        className="mr-2 text-theme focus:ring-hover-theme"
-                      />
-                      Interior designer/consultant
-                    </label>
-                  </div>
-                </div>
+          <button
+            type="submit"
+            className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors font-semibold text-sm mt-2"
+          >
+            Share via WhatsApp
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Preferred Temple Size</label>
-                  <select
-                    name="templeSize"
-                    value={formData.templeSize}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent text-sm"
-                  >
-                    <option value="">Select size</option>
-                    <option value="2-3 ft">2-3 ft (Compact)</option>
-                    <option value="3-4 ft">3-4 ft (Medium)</option>
-                    <option value="4-5 ft">4-5 ft (Large)</option>
-                    <option value="5+ ft">5+ ft (Grand)</option>
-                  </select>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-theme text-white py-3 rounded-lg hover:bg-hover-theme transition-colors font-semibold text-sm mt-2"
-                >
-                  Schedule Free Consultation
-                </button>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };

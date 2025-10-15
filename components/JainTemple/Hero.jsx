@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { FaTimes } from 'react-icons/fa';
-import styles from '../../styles/jaintemple/Hero.module.css';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { FaTimes } from "react-icons/fa";
+import styles from "../../styles/jaintemple/Hero.module.css";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isFormClosed, setIsFormClosed] = useState(false); // New state to track form closure
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    city: '',
-    userType: ''
+    fullName: "",
+    email: "",
+    phone: "",
+    city: "",
+    userType: "",
   });
 
   const [focusedFields, setFocusedFields] = useState({
     fullName: false,
     email: false,
     phone: false,
-    city: false
+    city: false,
   });
 
   // Prevent background scrolling when form is visible on mobile
   useEffect(() => {
     if (isFormVisible) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     // Cleanup function
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isFormVisible]);
 
@@ -39,14 +39,14 @@ const Hero = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleFocus = (field) => {
     setFocusedFields({
       ...focusedFields,
-      [field]: true
+      [field]: true,
     });
   };
 
@@ -54,15 +54,37 @@ const Hero = () => {
     if (!formData[field]) {
       setFocusedFields({
         ...focusedFields,
-        [field]: false
+        [field]: false,
       });
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+
+    // Make Name and Phone mandatory
+    if (!formData.fullName || !formData.phone) {
+      alert("Please fill in your Name and Phone number.");
+      return;
+    }
+
+    // Prepare WhatsApp message
+    const message = `
+Full Name: ${formData.fullName}
+${formData.email ? `Email: ${formData.email}` : ""}
+Phone: ${formData.phone}
+${formData.city ? `City: ${formData.city}` : ""}
+${formData.userType ? `User Type: ${formData.userType}` : ""}
+  `;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = "917014116801"; // Your WhatsApp number
+
+    // Navigate to WhatsApp
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      "_blank"
+    );
   };
 
   // New function to handle cross button click for desktop
@@ -70,28 +92,29 @@ const Hero = () => {
     setIsFormClosed(true);
   };
 
-
   // Framer Motion variants
   const textVariants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   return (
     <section className={styles.hero}>
       <div className={styles.heroContent}>
-        <div className={`${styles.leftContent} ${isFormClosed ? styles.centeredContent : ''}`}>
+        <div
+          className={`${styles.leftContent} ${
+            isFormClosed ? styles.centeredContent : ""
+          }`}
+        >
           {/* Animate Heading */}
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={textVariants}
-          >
-            Creating Sacred Spaces<br />For Generations
+          <motion.h1 initial="hidden" animate="visible" variants={textVariants}>
+            Creating Sacred Spaces
+            <br />
+            For Generations
           </motion.h1>
 
           {/* Mobile-only button */}
@@ -103,7 +126,11 @@ const Hero = () => {
           </button>
         </div>
 
-        <div className={`${styles.rightContent} ${isFormVisible ? styles.mobileFormVisible : ''} ${isFormClosed ? styles.hiddenForm : ''}`}>
+        <div
+          className={`${styles.rightContent} ${
+            isFormVisible ? styles.mobileFormVisible : ""
+          } ${isFormClosed ? styles.hiddenForm : ""}`}
+        >
           <div className={styles.contactForm}>
             {/* Close button for mobile */}
             <button
@@ -123,10 +150,11 @@ const Hero = () => {
 
             <h2>Talk to Our Expert</h2>
             <div className="text-sm font-bold text-gray-800 hover:text-gray-900 text-center">
-              Contact Us : <span >+91  7014116801</span>
+              Contact Us : <span>+91 7014116801</span>
             </div>
 
             <form onSubmit={handleSubmit}>
+              {/* Full Name */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <input
@@ -135,19 +163,24 @@ const Hero = () => {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    onFocus={() => handleFocus('fullName')}
-                    onBlur={() => handleBlur('fullName')}
+                    onFocus={() => handleFocus("fullName")}
+                    onBlur={() => handleBlur("fullName")}
                     required
                   />
                   <label
                     htmlFor="fullName"
-                    className={formData.fullName || focusedFields.fullName ? styles.focusedLabel : ''}
+                    className={
+                      formData.fullName || focusedFields.fullName
+                        ? styles.focusedLabel
+                        : ""
+                    }
                   >
                     Full Name *
                   </label>
                 </div>
               </div>
 
+              {/* Email */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <input
@@ -156,23 +189,31 @@ const Hero = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    onFocus={() => handleFocus('email')}
-                    onBlur={() => handleBlur('email')}
-                    required
+                    onFocus={() => handleFocus("email")}
+                    onBlur={() => handleBlur("email")}
                   />
                   <label
                     htmlFor="email"
-                    className={formData.email || focusedFields.email ? styles.focusedLabel : ''}
+                    className={
+                      formData.email || focusedFields.email
+                        ? styles.focusedLabel
+                        : ""
+                    }
                   >
                     Email Address *
                   </label>
                 </div>
               </div>
 
+              {/* Phone */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <div className={styles.phoneInputContainer}>
-                    <div className={`${styles.phoneInput} ${focusedFields.phone ? styles.phoneInputFocused : ''}`}>
+                    <div
+                      className={`${styles.phoneInput} ${
+                        focusedFields.phone ? styles.phoneInputFocused : ""
+                      }`}
+                    >
                       <span className={styles.countryCode}>+91</span>
                       <input
                         type="tel"
@@ -180,8 +221,8 @@ const Hero = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        onFocus={() => handleFocus('phone')}
-                        onBlur={() => handleBlur('phone')}
+                        onFocus={() => handleFocus("phone")}
+                        onBlur={() => handleBlur("phone")}
                         placeholder="Phone number"
                       />
                     </div>
@@ -189,6 +230,7 @@ const Hero = () => {
                 </div>
               </div>
 
+              {/* City */}
               <div className={styles.formGroup}>
                 <div className={styles.inputContainer}>
                   <input
@@ -197,28 +239,34 @@ const Hero = () => {
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    onFocus={() => handleFocus('city')}
-                    onBlur={() => handleBlur('city')}
-                    required
+                    onFocus={() => handleFocus("city")}
+                    onBlur={() => handleBlur("city")}
                   />
                   <label
                     htmlFor="city"
-                    className={formData.city || focusedFields.city ? styles.focusedLabel : ''}
+                    className={
+                      formData.city || focusedFields.city
+                        ? styles.focusedLabel
+                        : ""
+                    }
                   >
                     City *
                   </label>
                 </div>
               </div>
 
+              {/* User Type */}
               <div className={styles.formGroup}>
-                <label className={styles.radioLabel}>Tell us about yourself *</label>
+                <label className={styles.radioLabel}>
+                  Tell us about yourself *
+                </label>
                 <div className={styles.radioGroup}>
                   <label className={styles.radioOption}>
                     <input
                       type="radio"
                       name="userType"
                       value="homeowner"
-                      checked={formData.userType === 'homeowner'}
+                      checked={formData.userType === "homeowner"}
                       onChange={handleInputChange}
                     />
                     I am a homeowner looking for a pooja unit or pooja room
@@ -229,15 +277,19 @@ const Hero = () => {
                       type="radio"
                       name="userType"
                       value="designer"
-                      checked={formData.userType === 'designer'}
+                      checked={formData.userType === "designer"}
                       onChange={handleInputChange}
                     />
-                    I am an interior designer/consultant seeking solutions for my client
+                    I am an interior designer/consultant seeking solutions for
+                    my client
                   </label>
                 </div>
               </div>
 
-              <button type="submit" className={styles.nextButton}>Next</button>
+              {/* Submit Button */}
+              <button type="submit" className={styles.nextButton}>
+                Share via WhatsApp
+              </button>
             </form>
           </div>
         </div>

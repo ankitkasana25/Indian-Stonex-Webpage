@@ -465,134 +465,170 @@ const InteriorElegancePage = () => {
       </section>
 
       {/* Design Consultation Form Modal */}
-      <AnimatePresence>
-        {isFormVisible && (
-          <motion.div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+    <AnimatePresence>
+  {isFormVisible && (
+    <motion.div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+      >
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between">
+            <h3 className="text-2xl font-serif font-light text-gray-800">
+              Design Consultation
+            </h3>
+            <button 
+              onClick={() => setIsFormVisible(false)}
+              className="text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <div className="p-6 border-b border-gray-200">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-2xl font-serif font-light text-gray-800">
-                    Design Consultation
-                  </h3>
-                  <button 
-                    onClick={() => setIsFormVisible(false)}
-                    className="text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    <CloseIcon />
-                  </button>
-                </div>
-                <p className="text-gray-600 mt-2 text-sm">
-                  Share your interior details for a personalized temple design
-                </p>
-              </div>
+              <CloseIcon />
+            </button>
+          </div>
+          <p className="text-gray-600 mt-2 text-sm">
+            Share your interior details for a personalized temple design
+          </p>
+        </div>
 
-              <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Full Name *</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
-                    required
-                  />
-                </div>
+        <form onSubmit={(e) => {
+          e.preventDefault();
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Email Address *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
-                    required
-                  />
-                </div>
+          if (!formData.fullName || !formData.phone) {
+            alert("Please fill in your Name and Phone Number.");
+            return;
+          }
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Phone Number *</label>
-                  <div className="flex border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-amber-500 focus-within:border-transparent">
-                    <span className="px-3 py-2.5 bg-gray-100 border-r border-gray-300 flex items-center text-sm">+91</span>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Enter your number"
-                      className="w-full px-3 py-2.5 focus:outline-none text-sm"
-                      required
-                    />
-                  </div>
-                </div>
+          const whatsappNumber = "917014116801";
+          const text =
+            `Hello 👋,%0A%0A` +
+            `Here are the details:%0A` +
+            `Name: ${formData.fullName}%0A` +
+            `Phone: ${formData.phone}%0A` +
+            `Email: ${formData.email || "N/A"}%0A` +
+            `City: ${formData.city || "N/A"}%0A` +
+            `Preferred Interior Style: ${formData.interiorStyle || "N/A"}%0A` +
+            `Available Space Size: ${formData.spaceSize || "N/A"}%0A%0A` +
+            `Thank you!`;
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">City *</label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
-                    required
-                  />
-                </div>
+          const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+          window.open(url, "_blank");
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Preferred Interior Style *</label>
-                  <select
-                    name="interiorStyle"
-                    value={formData.interiorStyle}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
-                    required
-                  >
-                    <option value="">Select style</option>
-                    <option value="modern">Modern Minimalist</option>
-                    <option value="traditional">Classic Traditional</option>
-                    <option value="luxury">Luxury Grand</option>
-                    <option value="fusion">Minimalist Fusion</option>
-                  </select>
-                </div>
+          setFormData({
+            fullName: "",
+            email: "",
+            phone: "",
+            city: "",
+            interiorStyle: "",
+            spaceSize: ""
+          });
+        }} className="p-6 space-y-4">
 
-                <div>
-                  <label className="block text-gray-700 mb-2 font-medium text-sm">Available Space Size</label>
-                  <select
-                    name="spaceSize"
-                    value={formData.spaceSize}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
-                  >
-                    <option value="">Select size</option>
-                    <option value="small">Small (2-3 ft)</option>
-                    <option value="medium">Medium (3-4 ft)</option>
-                    <option value="large">Large (4-5 ft)</option>
-                    <option value="xlarge">Extra Large (5+ ft)</option>
-                  </select>
-                </div>
+          {/* Full Name */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">Full Name *</label>
+            <input
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
+              required
+            />
+          </div>
 
-                <button 
-                  type="submit"
-                  className="w-full bg-amber-600 text-white py-3 rounded-lg hover:bg-amber-700 transition-colors font-semibold text-sm mt-2"
-                >
-                  Get Design Proposal
-                </button>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {/* Phone Number */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">Phone Number *</label>
+            <div className="flex border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-amber-500 focus-within:border-transparent">
+              <span className="px-3 py-2.5 bg-gray-100 border-r border-gray-300 flex items-center text-sm">+91</span>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="Enter your number"
+                className="w-full px-3 py-2.5 focus:outline-none text-sm"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Email (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
+            />
+          </div>
+
+          {/* City (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">City</label>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
+            />
+          </div>
+
+          {/* Preferred Interior Style (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">Preferred Interior Style</label>
+            <select
+              name="interiorStyle"
+              value={formData.interiorStyle}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
+            >
+              <option value="">Select style</option>
+              <option value="modern">Modern Minimalist</option>
+              <option value="traditional">Classic Traditional</option>
+              <option value="luxury">Luxury Grand</option>
+              <option value="fusion">Minimalist Fusion</option>
+            </select>
+          </div>
+
+          {/* Available Space Size (optional) */}
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium text-sm">Available Space Size</label>
+            <select
+              name="spaceSize"
+              value={formData.spaceSize}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
+            >
+              <option value="">Select size</option>
+              <option value="small">Small (2-3 ft)</option>
+              <option value="medium">Medium (3-4 ft)</option>
+              <option value="large">Large (4-5 ft)</option>
+              <option value="xlarge">Extra Large (5+ ft)</option>
+            </select>
+          </div>
+
+          <button 
+            type="submit"
+            className="w-full bg-amber-600 text-white py-3 rounded-lg hover:bg-amber-700 transition-colors font-semibold text-sm mt-2"
+          >
+            Share via WhatsApp
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </div>
   );
 };

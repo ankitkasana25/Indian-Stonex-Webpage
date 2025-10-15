@@ -335,169 +335,204 @@ const ExpertiseSection = () => {
       </section>
 
       {/* Form Overlay */}
-      {showForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-          <div className="relative bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            {/* Close Button */}
-            <button
-              onClick={handleCloseForm}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors z-10"
+   {showForm && (
+  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+    <div className="relative bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      {/* Close Button */}
+      <button
+        onClick={handleCloseForm}
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors z-10"
+      >
+        <FaTimes size={24} />
+      </button>
+
+      {/* Form Content */}
+      <div className="p-8">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
+          Talk to Our Expert
+        </h2>
+        <div className="text-sm font-bold text-gray-800 hover:text-gray-900 text-center">
+          Contact Us : <span>+91 7014116801</span>
+        </div>
+        <p className="text-gray-600 mb-6 text-center">
+          Fill in your details and we'll get back to you shortly.
+        </p>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            if (!formData.fullName || !formData.phone) {
+              alert("Please fill in your Name and Phone Number.");
+              return;
+            }
+
+            const whatsappNumber = "917014116801";
+            const text = 
+              `Hello 👋,%0A%0A` +
+              `Here are the details:%0A` +
+              `Name: ${formData.fullName}%0A` +
+              `Phone: ${formData.phone}%0A` +
+              `Email: ${formData.email || "N/A"}%0A` +
+              `City: ${formData.city || "N/A"}%0A` +
+              `User Type: ${formData.userType || "N/A"}%0A%0A` +
+              `Thank you!`;
+            
+            const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+            window.open(url, "_blank");
+
+            setFormData({
+              fullName: "",
+              email: "",
+              phone: "",
+              city: "",
+              userType: "",
+            });
+          }}
+          className="space-y-6"
+        >
+          {/* Full Name */}
+          <div className="relative">
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              onFocus={() => handleFocus("fullName")}
+              onBlur={() => handleBlur("fullName")}
+              required
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+            />
+            <label
+              htmlFor="fullName"
+              className={`absolute left-4 transition-all duration-200 pointer-events-none ${
+                formData.fullName || focusedFields.fullName
+                  ? "top-0 text-xs bg-white px-2 text-amber-600 -translate-y-1/2"
+                  : "top-3 text-gray-500"
+              }`}
             >
-              <FaTimes size={24} />
-            </button>
+              Full Name *
+            </label>
+          </div>
 
-            {/* Form Content */}
-            <div className="p-8">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
-                Talk to Our Expert
-              </h2>
-              <div className="text-sm font-bold text-gray-800 hover:text-gray-900 text-center">
-                Contact Us : <span >+91  7014116801</span>
-              </div>
-              <p className="text-gray-600 mb-6">
-                Fill in your details and we'll get back to you shortly.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Full Name */}
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    onFocus={() => handleFocus('fullName')}
-                    onBlur={() => handleBlur('fullName')}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                  />
-                  <label
-                    htmlFor="fullName"
-                    className={`absolute left-4 transition-all duration-200 pointer-events-none ${formData.fullName || focusedFields.fullName
-                        ? 'top-0 text-xs bg-white px-2 text-amber-600 -translate-y-1/2'
-                        : 'top-3 text-gray-500'
-                      }`}
-                  >
-                    Full Name *
-                  </label>
-                </div>
-
-                {/* Email */}
-                <div className="relative">
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    onFocus={() => handleFocus('email')}
-                    onBlur={() => handleBlur('email')}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                  />
-                  <label
-                    htmlFor="email"
-                    className={`absolute left-4 transition-all duration-200 pointer-events-none ${formData.email || focusedFields.email
-                        ? 'top-0 text-xs bg-white px-2 text-amber-600 -translate-y-1/2'
-                        : 'top-3 text-gray-500'
-                      }`}
-                  >
-                    Email Address *
-                  </label>
-                </div>
-
-                {/* Phone */}
-                <div className="relative">
-                  <div className="flex border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-amber-500 focus-within:border-transparent transition-all">
-                    <span className="px-4 py-3 bg-gray-50 border-r border-gray-300 text-gray-700">
-                      +91
-                    </span>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      onFocus={() => handleFocus('phone')}
-                      onBlur={() => handleBlur('phone')}
-                      placeholder="Phone number"
-                      className="w-full px-4 py-3 focus:outline-none rounded-r-lg"
-                    />
-                  </div>
-                </div>
-
-                {/* City */}
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    onFocus={() => handleFocus('city')}
-                    onBlur={() => handleBlur('city')}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                  />
-                  <label
-                    htmlFor="city"
-                    className={`absolute left-4 transition-all duration-200 pointer-events-none ${formData.city || focusedFields.city
-                        ? 'top-0 text-xs bg-white px-2 text-amber-600 -translate-y-1/2'
-                        : 'top-3 text-gray-500'
-                      }`}
-                  >
-                    City *
-                  </label>
-                </div>
-
-                {/* User Type */}
-                <div className="space-y-3">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Tell us about yourself *
-                  </label>
-
-                  <label className="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-                    <input
-                      type="radio"
-                      name="userType"
-                      value="homeowner"
-                      checked={formData.userType === 'homeowner'}
-                      onChange={handleInputChange}
-                      className="mt-1 text-amber-500 focus:ring-amber-500"
-                    />
-                    <span className="text-sm text-gray-700">
-                      I am a homeowner looking for stone work solutions
-                    </span>
-                  </label>
-
-                  <label className="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-                    <input
-                      type="radio"
-                      name="userType"
-                      value="designer"
-                      checked={formData.userType === 'designer'}
-                      onChange={handleInputChange}
-                      className="mt-1 text-amber-500 focus:ring-amber-500"
-                    />
-                    <span className="text-sm text-gray-700">
-                      I am an interior designer/consultant seeking solutions for my client
-                    </span>
-                  </label>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
-                >
-                  Get Free Consultation
-                </button>
-              </form>
+          {/* Phone */}
+          <div className="relative">
+            <div className="flex border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-amber-500 focus-within:border-transparent transition-all">
+              <span className="px-4 py-3 bg-gray-50 border-r border-gray-300 text-gray-700">
+                +91
+              </span>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                onFocus={() => handleFocus("phone")}
+                onBlur={() => handleBlur("phone")}
+                placeholder="Phone number"
+                required
+                className="w-full px-4 py-3 focus:outline-none rounded-r-lg"
+              />
             </div>
           </div>
-        </div>
-      )}
+
+          {/* Email (optional) */}
+          <div className="relative">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              onFocus={() => handleFocus("email")}
+              onBlur={() => handleBlur("email")}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+            />
+            <label
+              htmlFor="email"
+              className={`absolute left-4 transition-all duration-200 pointer-events-none ${
+                formData.email || focusedFields.email
+                  ? "top-0 text-xs bg-white px-2 text-amber-600 -translate-y-1/2"
+                  : "top-3 text-gray-500"
+              }`}
+            >
+              Email Address
+            </label>
+          </div>
+
+          {/* City (optional) */}
+          <div className="relative">
+            <input
+              type="text"
+              id="city"
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
+              onFocus={() => handleFocus("city")}
+              onBlur={() => handleBlur("city")}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+            />
+            <label
+              htmlFor="city"
+              className={`absolute left-4 transition-all duration-200 pointer-events-none ${
+                formData.city || focusedFields.city
+                  ? "top-0 text-xs bg-white px-2 text-amber-600 -translate-y-1/2"
+                  : "top-3 text-gray-500"
+              }`}
+            >
+              City
+            </label>
+          </div>
+
+          {/* User Type (optional) */}
+          <div className="space-y-3">
+            <label className="block text-sm font-medium text-gray-700">
+              Tell us about yourself
+            </label>
+
+            <label className="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+              <input
+                type="radio"
+                name="userType"
+                value="homeowner"
+                checked={formData.userType === "homeowner"}
+                onChange={handleInputChange}
+                className="mt-1 text-amber-500 focus:ring-amber-500"
+              />
+              <span className="text-sm text-gray-700">
+                I am a homeowner looking for stone work solutions
+              </span>
+            </label>
+
+            <label className="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+              <input
+                type="radio"
+                name="userType"
+                value="designer"
+                checked={formData.userType === "designer"}
+                onChange={handleInputChange}
+                className="mt-1 text-amber-500 focus:ring-amber-500"
+              />
+              <span className="text-sm text-gray-700">
+                I am an interior designer/consultant seeking solutions for my client
+              </span>
+            </label>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+          >
+            Share via WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+)}
+
     </>
   );
 };
