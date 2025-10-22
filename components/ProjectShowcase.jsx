@@ -46,7 +46,7 @@ const ProjectShowcase = () => {
     responsive: [
       { breakpoint: 1200, settings: { slidesToShow: 3 } },
       { breakpoint: 900, settings: { slidesToShow: 2 } },
-      { breakpoint: 600, settings: { slidesToShow: 1 } },
+      { breakpoint: 768, settings: { slidesToShow: 1 } }, // ✅ one image on mobile
     ],
   };
 
