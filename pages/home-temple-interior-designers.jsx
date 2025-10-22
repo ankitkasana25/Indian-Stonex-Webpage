@@ -1,21 +1,19 @@
+"use client";
+
 import Head from "next/head";
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
-import styles from "../styles/Home.module.css";
-import Hero from "../components/TsaDesignhub/Hero";
-import DreamTempleBudget from "../components/DreamTempleBudget";
-import ComparisonTable from "../components/ComparisonTable";
-import DimensionsPictures from "../components/DimensionsPictures";
-import ProjectShowcase from "../components/ProjectShowcase";
-import CitySection from "../components/CitySection";
-import FAQ from "../components/FAQ";
-import PoojaRoomJourney from "../components/PoojaRoomJourney";
-import DesignSteps from "../components/DesignSteps";
-import ClientCarousel from "../components/ClientCarousel";
+import { useState } from "react";
+import { getDatabase, ref, push, set } from "firebase/database";
+import { app } from "./firebase";
+
+
 import ImageTextSection from "../components/TsaDesignhub/ImageTextSection";
 import HelpSection from "../components/TsaDesignhub/HelpSection";
 import CollaborateSection from "../components/TsaDesignhub/CollaborateSection";
 import ScopeOfWorkSection from "../components/TsaDesignhub/ScopeOfWorkSection";
+import PoojaRoomJourney from "../components/PoojaRoomJourney";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,23 +24,65 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Home() {
-  return (
+const db = getDatabase(app);
 
-    <div >
-      <Hero />
+export default function Home() {
+  const [loading, setLoading] = useState(false);
+
+  // 🔥 Handle form submit from Hero
+  const handleFormSubmit = async (formData) => {
+    setLoading(true);
+    try {
+      // ✅ Save data to Firebase Realtime Database
+      const userRef = push(ref(db, "heroContacts"));
+      await set(userRef, {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        city: formData.city,
+        userType: formData.userType,
+        timestamp: new Date().toISOString(),
+      });
+
+      // ✅ WhatsApp Number (no "+")
+      const whatsappNumber = "917014116801";
+
+      // ✅ WhatsApp message text
+      const text = `Hello Adidev Studio 👋,%0A%0A` +
+        `I would like to consult about your Dream Mandir.%0A%0A` +
+        `Full Name: ${formData.fullName}%0A` +
+        `Email: ${formData.email}%0A` +
+        `Phone: ${formData.phone}%0A` +
+        `City: ${formData.city}%0A` +
+        `User Type: ${formData.userType}`;
+
+      const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+      window.open(url, "_blank");
+
+      alert("Your details have been sent successfully!");
+    } catch (error) {
+      console.error("Error saving data:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <Hero
+        title="Start Building"
+        highlight="Your Dream Mandir"
+        subtitle="Elegant handcrafted marble temples, customized for your home."
+        buttonText={loading ? "Sending..." : "Consult Our Expert"}
+        phoneNumber="+91 7014116801"
+        onSubmit={handleFormSubmit}
+        showForm={true}
+      />
       <ImageTextSection />
       <HelpSection />
-      <CollaborateSection />
+      {/* <CollaborateSection /> */}
       <ScopeOfWorkSection />
-      {/* <DreamTempleBudget/>
-        <ComparisonTable/>
-        <DimensionsPictures/>
-        <DesignSteps/>
-        <ProjectShowcase/>
-        <CitySection/>
-        <ClientCarousel/> 
-        <FAQ/> */}
       <PoojaRoomJourney />
     </div>
   );
