@@ -10,6 +10,7 @@ import HelpSection from "../components/TsaDesignhub/HelpSection";
 import CollaborateSection from "../components/TsaDesignhub/CollaborateSection";
 import ScopeOfWorkSection from "../components/TsaDesignhub/ScopeOfWorkSection";
 import PoojaRoomJourney from "../components/PoojaRoomJourney";
+import Hero from "@/components/Hero";
 
 
 const geistSans = Geist({
