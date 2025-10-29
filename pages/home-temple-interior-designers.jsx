@@ -4,8 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import { useState } from "react";
-import { getDatabase, ref, push, set } from "firebase/database";
-import { app } from "../lib/firebase";
+
 import ImageTextSection from "../components/TsaDesignhub/ImageTextSection";
 import HelpSection from "../components/TsaDesignhub/HelpSection";
 import CollaborateSection from "../components/TsaDesignhub/CollaborateSection";
@@ -23,7 +22,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const db = getDatabase(app);
+
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
