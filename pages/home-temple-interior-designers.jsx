@@ -6,13 +6,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { useState } from "react";
 import { getDatabase, ref, push, set } from "firebase/database";
 import { app } from "./firebase";
-
-
 import ImageTextSection from "../components/TsaDesignhub/ImageTextSection";
 import HelpSection from "../components/TsaDesignhub/HelpSection";
 import CollaborateSection from "../components/TsaDesignhub/CollaborateSection";
 import ScopeOfWorkSection from "../components/TsaDesignhub/ScopeOfWorkSection";
 import PoojaRoomJourney from "../components/PoojaRoomJourney";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
