@@ -10,7 +10,6 @@ import HelpSection from "../components/TsaDesignhub/HelpSection";
 import CollaborateSection from "../components/TsaDesignhub/CollaborateSection";
 import ScopeOfWorkSection from "../components/TsaDesignhub/ScopeOfWorkSection";
 import PoojaRoomJourney from "../components/PoojaRoomJourney";
-import Hero from "@/components/Hero";
 
 
 const geistSans = Geist({
@@ -72,7 +71,7 @@ export default function Home() {
 
   return (
     <div>
-      <Hero
+      {/* <Hero
         title="Start Building"
         highlight="Your Dream Mandir"
         subtitle="Elegant handcrafted marble temples, customized for your home."
@@ -80,7 +79,7 @@ export default function Home() {
         phoneNumber="+91 7014116801"
         onSubmit={handleFormSubmit}
         showForm={true}
-      />
+      /> */}
       <ImageTextSection />
       <HelpSection />
       {/* <CollaborateSection /> */}
