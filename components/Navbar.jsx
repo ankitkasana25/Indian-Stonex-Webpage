@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { cn } from "../lib/utils"
-import { Separator } from "../components/ui/separator"
-import Image from "next/image";
 import { useRouter } from "next/router";
+import { ref, push, set } from "firebase/database";
+import { db } from "../lib/firebase";
 
 const navItems = [
   {
     name: "Indian Stonex", href: "",
     dropdown: [
       { name: "About Us", href: "/About", src: "/HDimg.jpg" },
-      { name: "The Team", href: "/", src: '/HDImg3.jpg' },
-      { name: "Artisans", href: "/", src: '/HDImg2.jpg' },
+      { name: "The Team", href: "/About#team", src: '/HDImg3.jpg' },
+      { name: "Artisans", href: "/About#artisans", src: '/HDImg2.jpg' },
       { name: "Our Clients", href: "/OurClients", src: '/HDImg4.jpg' },
     ],
   },
@@ -49,6 +48,14 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState(null);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [contactFormData, setContactFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    city: '',
+    userType: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,6 +86,75 @@ const Navbar = () => {
 
   const toggleContactForm = () => {
     setShowContactForm(!showContactForm);
+    if (showContactForm) {
+      setContactFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        city: '',
+        userType: ''
+      });
+    }
+  };
+
+  const handleContactFormChange = (e) => {
+    const { name, value } = e.target;
+    setContactFormData({
+      ...contactFormData,
+      [name]: value
+    });
+  };
+
+  const handleContactFormSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!contactFormData.fullName.trim() || !contactFormData.phone.trim()) {
+      alert('Please fill in your Full Name and Phone Number.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const userRef = push(ref(db, "navbarContacts"));
+      await set(userRef, {
+        fullName: contactFormData.fullName,
+        email: contactFormData.email,
+        phone: contactFormData.phone,
+        city: contactFormData.city,
+        userType: contactFormData.userType,
+        timestamp: new Date().toISOString(),
+      });
+
+      const whatsappNumber = "917014116801";
+      const text = `Hello Indian Stonex 👋,%0A%0A` +
+        `I would like to consult about your services.%0A%0A` +
+        `Full Name: ${contactFormData.fullName}%0A` +
+        `Email: ${contactFormData.email || 'N/A'}%0A` +
+        `Phone: ${contactFormData.phone}%0A` +
+        `City: ${contactFormData.city || 'N/A'}%0A` +
+        `User Type: ${contactFormData.userType || 'N/A'}`;
+
+      const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+
+      if (typeof window !== "undefined") {
+        window.open(url, "_blank");
+        alert("Your details have been sent successfully!");
+        setShowContactForm(false);
+        setContactFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          city: '',
+          userType: ''
+        });
+      }
+    } catch (error) {
+      if (typeof window !== "undefined") {
+        alert("Something went wrong. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -319,7 +395,7 @@ const Navbar = () => {
               Contact Us : <span >+91  7014116801</span>
             </div>
 
-            <form>
+            <form onSubmit={handleContactFormSubmit}>
               {/* Full Name Field */}
               <div className="mb-4 relative">
                 <div className="relative mt-6">
@@ -327,6 +403,8 @@ const Navbar = () => {
                     type="text"
                     id="fullName"
                     name="fullName"
+                    value={contactFormData.fullName}
+                    onChange={handleContactFormChange}
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 peer text-gray-900 text-base focus:ring-0"
                     required
                   />
@@ -346,14 +424,15 @@ const Navbar = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={contactFormData.email}
+                    onChange={handleContactFormChange}
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 peer text-gray-900 text-base focus:ring-0"
-                    required
                   />
                   <label
                     htmlFor="email"
                     className="absolute left-3 top-2 text-gray-500 text-sm transition-all duration-200 pointer-events-none peer-focus:top-[-0.75rem] peer-focus:left-2 peer-focus:text-xs peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1"
                   >
-                    Email Address *
+                    Email Address
                   </label>
                 </div>
               </div>
@@ -367,8 +446,11 @@ const Navbar = () => {
                       type="tel"
                       id="phone"
                       name="phone"
-                      placeholder="Phone number"
+                      value={contactFormData.phone}
+                      onChange={handleContactFormChange}
+                      placeholder="Phone number *"
                       className="w-full px-3 py-2.5 focus:outline-none text-gray-900 text-base focus:ring-0"
+                      required
                     />
                   </div>
                 </div>
@@ -381,27 +463,30 @@ const Navbar = () => {
                     type="text"
                     id="city"
                     name="city"
+                    value={contactFormData.city}
+                    onChange={handleContactFormChange}
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 peer text-gray-900 text-base focus:ring-0"
-                    required
                   />
                   <label
                     htmlFor="city"
                     className="absolute left-3 top-2 text-gray-500 text-sm transition-all duration-200 pointer-events-none peer-focus:top-[-0.75rem] peer-focus:left-2 peer-focus:text-xs peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1"
                   >
-                    City *
+                    City
                   </label>
                 </div>
               </div>
 
               {/* User Type Radio Buttons */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">Tell us about yourself *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-3">Tell us about yourself</label>
                 <div className="space-y-3">
                   <label className="flex items-start">
                     <input
                       type="radio"
                       name="userType"
                       value="homeowner"
+                      checked={contactFormData.userType === 'homeowner'}
+                      onChange={handleContactFormChange}
                       className="mt-1 mr-3 focus:ring-0"
                     />
                     <span className="text-sm text-gray-700 leading-relaxed">I am a homeowner looking for a pooja unit or pooja room</span>
@@ -411,6 +496,8 @@ const Navbar = () => {
                       type="radio"
                       name="userType"
                       value="designer"
+                      checked={contactFormData.userType === 'designer'}
+                      onChange={handleContactFormChange}
                       className="mt-1 mr-3 focus:ring-0"
                     />
                     <span className="text-sm text-gray-700 leading-relaxed">I am an interior designer/consultant seeking solutions for my client</span>
@@ -420,9 +507,10 @@ const Navbar = () => {
 
               <button
                 type="submit"
-                className="w-full bg-gray-900 text-white py-3 px-4 rounded-md hover:bg-gray-800 transition-colors font-medium focus:outline-none focus:ring-0 text-base"
+                disabled={isSubmitting}
+                className="w-full bg-gray-900 text-white py-3 px-4 rounded-md hover:bg-gray-800 transition-colors font-medium focus:outline-none focus:ring-0 text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Next
+                {isSubmitting ? 'Sending...' : 'Submit'}
               </button>
             </form>
           </div>

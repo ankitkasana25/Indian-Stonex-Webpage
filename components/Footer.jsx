@@ -71,13 +71,13 @@ const Footer = () => {
                                 About Us
                             </Link>
                             <Link
-                                href={"/"}
+                                href={"/About#team"}
                                 className="text-sm text-gray-300 hover:translate-x-1 transition-all duration-200 font-light tracking-wide"
                             >
                                 The Team
                             </Link>
                             <Link
-                                href={"/"}
+                                href={"/About#artisans"}
                                 className="text-sm text-gray-300  hover:translate-x-1 transition-all duration-200 font-light tracking-wide"
                             >
                                 Artisans
@@ -147,17 +147,17 @@ const Footer = () => {
                         </h3>
                         <div className="flex flex-col gap-3">
                             <Link
-                                href={"#faq"}
+                                href={"/#faq"}
                                 className="text-sm text-gray-300 hover:translate-x-1 transition-all duration-200 font-light tracking-wide"
                             >
                                 FAQs
                             </Link>
-                            <Link
-                                href={"/"}
+                            <a
+                                href="tel:+917014116801"
                                 className="text-sm text-gray-300  hover:translate-x-1 transition-all duration-200 font-light tracking-wide"
                             >
                                 Call Us
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>

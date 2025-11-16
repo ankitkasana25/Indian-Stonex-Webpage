@@ -14,6 +14,14 @@ import FAQ from "../components/FAQ";
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Indian Stonex - Premium Marble Temples & Stone Artistry | Home</title>
+        <meta name="description" content="Create your dream marble temple with Indian Stonex. Handcrafted pooja rooms, custom temple designs, and stone sculptures. ISO 9001:2015 certified. Free consultation available." />
+        <meta name="keywords" content="marble temple, pooja room design, custom mandir, marble temple for home, stone sculpture, temple design" />
+        <meta property="og:title" content="Indian Stonex - Premium Marble Temples & Stone Artistry" />
+        <meta property="og:description" content="Create your dream marble temple with Indian Stonex. Handcrafted pooja rooms and custom temple designs." />
+        <link rel="canonical" href="https://www.indianstonex.com" />
+      </Head>
       <div className="min-h-[80vh] w-full">
         <Hero />
 

@@ -59,8 +59,7 @@ const PoojaRoomJourney = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    // Form submission handled via WhatsApp
     setShowForm(false);
   };
 

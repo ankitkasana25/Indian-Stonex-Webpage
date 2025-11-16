@@ -61,8 +61,7 @@ const Hero = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    // Form submission handled via WhatsApp
   };
 
   // New function to handle cross button click for desktop

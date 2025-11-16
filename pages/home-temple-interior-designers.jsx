@@ -1,9 +1,8 @@
 "use client";
 
-import Head from "next/head";
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
 import { useState } from "react";
+import { ref, push, set } from "firebase/database";
+import { db } from "../lib/firebase";
 
 import ImageTextSection from "../components/TsaDesignhub/ImageTextSection";
 import HelpSection from "../components/TsaDesignhub/HelpSection";
@@ -59,7 +58,6 @@ export default function Home() {
       alert("Your details have been sent successfully!");
     }
   } catch (error) {
-    console.error("Error saving data:", error);
     if (typeof window !== "undefined") {
       alert("Something went wrong. Please try again.");
     }

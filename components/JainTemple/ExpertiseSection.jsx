@@ -100,7 +100,7 @@ const ExpertiseSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    // Form submission handled via WhatsApp
     setShowForm(false);
     setFormData({
       fullName: '',

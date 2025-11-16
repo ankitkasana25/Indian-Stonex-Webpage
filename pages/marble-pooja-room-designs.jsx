@@ -9,7 +9,7 @@ import DimensionsPictures from "../components/DimensionsPictures";
 import ProjectShowcase from "../components/ProjectShowcase";
 import CitySection from "../components/CitySection";
 import FAQ from "../components/FAQ";
-import PoojaRoomJourney from "/components/PoojaRoomJourney";
+import PoojaRoomJourney from "../components/PoojaRoomJourney";
 import DesignSteps from "../components/DesignSteps";
 import ClientCarousel from "../components/ClientCarousel";
 import Solutions from "../components/Poojaroom/Solutions";

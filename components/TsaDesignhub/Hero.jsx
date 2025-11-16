@@ -48,8 +48,9 @@ const Hero = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onSubmit) onSubmit(formData);
-    else console.log("Form submitted:", formData);
+    if (onSubmit) {
+      onSubmit(formData);
+    }
   };
 
   return (

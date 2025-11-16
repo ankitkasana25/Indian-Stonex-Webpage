@@ -148,7 +148,7 @@ const MarbleTemple = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // Form submission handled via WhatsApp
     setIsFormVisible(false);
     // Reset form
     setFormData({

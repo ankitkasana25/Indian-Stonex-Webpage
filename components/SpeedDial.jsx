@@ -34,13 +34,11 @@ export default function SpeedDial() {
         `}
       >
         {actions.map((action) => (
-          <Link href={action.href}>
+          <Link key={action.label} href={action.href} target="_blank" rel="noopener noreferrer">
             <Button
-              key={action.label}
               size="icon"
               variant="secondary"
               className="rounded-full shadow-lg hover:cursor-pointer hover:scale-110"
-              onClick={() => console.log(action.label)}
             >
               {action.icon}
             </Button>

@@ -1,6 +1,9 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import Head from "next/head";
+
+
 
 export default function AboutUs() {
   const heroRef = useRef(null)
@@ -40,7 +43,16 @@ export default function AboutUs() {
   const displayedImages = showAll ? images : images.slice(0, 6)
 
   return (
-    <main className="min-h-screen bg-white font-sans">
+    <>
+      <Head>
+        <title>About Us - Indian Stonex | ISO 9001:2015 Certified Marble Temple Craftsmanship</title>
+        <meta name="description" content="Learn about Indian Stonex - ISO 9001:2015 certified marble temple craftsmen. Over 25 years of experience creating handcrafted temples, sculptures, and stone artistry. Based in Makrana, Rajasthan." />
+        <meta name="keywords" content="Indian Stonex about, marble temple company, ISO certified temple makers, Makrana marble artisans, stone craftsmanship" />
+        <meta property="og:title" content="About Indian Stonex - ISO 9001:2015 Certified Marble Temple Craftsmanship" />
+        <meta property="og:description" content="Over 25 years of experience creating handcrafted marble temples, sculptures, and stone artistry." />
+        <link rel="canonical" href="https://www.indianstonex.com/About" />
+      </Head>
+      <main className="min-h-screen bg-white font-sans">
       {/* ---------------- HERO SECTION ---------------- */}
       <section
         ref={heroRef}
@@ -283,8 +295,92 @@ export default function AboutUs() {
         )}
       </section>
 
+      {/* ---------------- TEAM SECTION ---------------- */}
+      <section id="team" className="fade-in-section scroll-mt-20 bg-white py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16">
+            <span className="block font-light tracking-wide text-xl text-[#ff7e2e]">OUR TEAM</span>
+            <h2 className="mt-4 font-light text-3xl sm:text-4xl md:text-5xl">
+              Meet Our <span className="text-[#ff7e2e]">Expert Team</span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+              Our dedicated team of professionals brings decades of combined experience in marble craftsmanship and temple design.
+            </p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-3">
+            {[
+              { role: "Master Craftsmen", desc: "Skilled artisans with generations of expertise in marble carving and temple design." },
+              { role: "Design Experts", desc: "Creative professionals who transform your vision into beautiful, functional designs." },
+              { role: "Quality Assurance", desc: "Dedicated team ensuring every piece meets our high standards of excellence." },
+            ].map((item, idx) => (
+              <div key={idx} className="rounded-2xl border border-gray-200 bg-gray-50 p-8 text-center">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.role}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- ARTISANS SECTION ---------------- */}
+      <section id="artisans" className="fade-in-section scroll-mt-20 bg-gray-50 py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16">
+            <span className="block font-light tracking-wide text-xl text-[#ff7e2e]">OUR ARTISANS</span>
+            <h2 className="mt-4 font-light text-3xl sm:text-4xl md:text-5xl">
+              Master <span className="text-[#ff7e2e]">Artisans</span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+              Our artisans are the heart of Indian Stonex. With skills passed down through generations, they bring life to every piece of marble.
+            </p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="rounded-2xl border border-gray-200 bg-white p-8">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Traditional Craftsmanship</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Our artisans combine time-honored techniques with modern precision, creating pieces that honor tradition while meeting contemporary standards.
+              </p>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-[#ff7e2e] mt-1">✓</span>
+                  <span>Hand-carved intricate designs</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#ff7e2e] mt-1">✓</span>
+                  <span>Expert marble selection and cutting</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#ff7e2e] mt-1">✓</span>
+                  <span>Precision inlay and detailing work</span>
+                </li>
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-gray-200 bg-white p-8">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Artisan Excellence</h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Each artisan at Indian Stonex is carefully selected for their skill, dedication, and passion for creating beautiful stonework.
+              </p>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-start gap-2">
+                  <span className="text-[#ff7e2e] mt-1">✓</span>
+                  <span>Years of specialized training</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#ff7e2e] mt-1">✓</span>
+                  <span>Commitment to quality and detail</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#ff7e2e] mt-1">✓</span>
+                  <span>Continuous skill development</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ---------------- CONTACT CTA SECTION ---------------- */}
-      <section id="contact" className="fade-in-section scroll-mt-20 bg-gray-50 py-24">
+      <section id="contact" className="fade-in-section scroll-mt-20 bg-white py-24">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <h2 className="text-3xl font-light sm:text-4xl md:text-5xl">
             Let's Create Something{" "}
@@ -313,5 +409,6 @@ export default function AboutUs() {
         </div>
       </section>
     </main>
+    </>
   )
 }

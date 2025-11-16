@@ -58,8 +58,7 @@ const WhyChooseUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+    // Form submission handled via WhatsApp
     setShowForm(false);
     // Reset form
     setFormData({
